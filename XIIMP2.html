@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Resmi Kelas XII MP 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Umum */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #303550; 
+            background-image: linear-gradient(135deg, #303550 0%, #6a6e8f 100%);
+            color: white;
+            padding: 80px 0 120px 0;
+            margin-bottom: 0;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        /* --- CSS NAVIGATION BAR (Fix Position & Smooth Scroll) --- */
+        .navbar {
+            /* PERUBAHAN DI SINI: MENGHAPUS TRANSPARANSI & BLUR */
+            background-color: #303550; /* Menggunakan warna solid biru tua */
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
+            /* Dibuat Fixed agar selalu terlihat saat scroll */
+            position: fixed; 
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50px;
+            width: fit-content;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            list-style: none;
+            margin: 0 15px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .navbar-item a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-item a:hover {
+            background-color: #6a6e8f; /* Menggunakan warna gradasi kedua untuk hover */
+        }
+
+        /* --- CSS Konten Utama (Sections) --- */
+        .section {
+            padding: 60px 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #303550;
+            margin-bottom: 40px;
+            font-size: 32px;
+            border-bottom: 3px solid #ffc107;
+            padding-bottom: 10px;
+            display: inline-block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .access-buttons {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .button {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+        }
+        #openSocialBtn { 
+             background-color: #c13584; 
+             color: white;
+        }
+
+        /* --- CSS STRUKTUR KELAS --- */
+        #structure-section {
+            text-align: center;
+        }
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .structure-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #007bff;
+            box-shadow: none;
+        }
+        
+        .wali-kelas-card {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+            background-color: #e6f7ff;
+            border: 2px solid #007bff;
+            padding: 20px;
+        }
+
+        .wali-kelas-card img {
+            border-color: #28a745;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .wali-kelas-card h4 {
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        /* --- CSS JADWAL & GALERI --- */
+        #schedule-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 10px auto;
+            display: block;
+        }
+        
+        #gallery-section {
+            text-align: center;
+        }
+        
+        /* MODIFIKASI/TAMBAHAN CSS untuk grid foto */
+        #galleryGridContainer { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Atur ke grid */
+            gap: 20px;
+            align-items: flex-start; /* Untuk keseragaman vertikal */
+        }
+        
+        /* Modifikasi agar gambar terlihat lebih baik di grid */
+        #galleryGridContainer img { 
+            width: 100%; /* Agar foto mengisi kolom */
+            height: auto;
+            max-height: 400px; /* Batasi tinggi agar tidak terlalu besar */
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 0; /* Hapus margin auto block */
+            display: block;
+        }
+        /* --- End CSS Galeri --- */
+
+
+        /* --- CSS ANGGOTA KELAS (Dinamis dengan Paginasi) --- */
+        #members-section {
+            text-align: center;
+        }
+        #memberGridContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            min-height: 400px; /* Memastikan ruang cukup untuk 6 kartu */
+        }
+        .member-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+        }
+        .member-card p {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+        }
+        .member-card h4 {
+            margin-bottom: 5px;
+            color: #303550;
+        }
+        .member-card small {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .member-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffc107;
+            margin-bottom: 10px;
+            box-shadow: none;
+        }
+
+        /* --- CSS PAGINASI (Umum) --- */
+        .pagination {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pagination-item a, 
+        .pagination-item span {
+            display: block;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #303550;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .pagination-item a.disabled {
+            pointer-events: none;
+            background-color: #f8f9fa;
+            color: #ccc;
+        }
+        .pagination-item a:not(.disabled):hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination-item.active span {
+            background-color: #303550;
+            color: white;
+            border-color: #303550;
+        }
+
+
+        /* --- CSS MODAL SOSIAL MEDIA (Tetap Modal) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+            text-align: center;
+        }
+        
+        .instagram-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .instagram-icon {
+            font-size: 60px; 
+            margin-right: 15px;
+            background: -webkit-linear-gradient(45deg, #f09433 0%,#e6684a 25%,#c8417c 50%,#83439b 75%,#5851db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .close-button {
+            color: #ccc;
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            font-size: 40px;
+            font-weight: lighter;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-button:hover { color: #f00; }
+
+        /* Keyframes */
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div style="position: relative; z-index: 5;">
+            <p style="margin-bottom: 0;">Situs Resmi</p>
+            <h1>XII MP 2</h1>
+            <p>Tahun Ajaran [2024/2025]</p>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <ul class="navbar-content">
+            <li class="navbar-item"><a href="#about-section" class="scroll-link">About Us</a></li>
+            <li class="navbar-item"><a href="#structure-section" class="scroll-link">Struktur Kelas</a></li>
+            <li class="navbar-item"><a href="#members-section" class="scroll-link">Anggota Kelas</a></li>
+            <li class="navbar-item"><a href="#schedule-section" class="scroll-link">Jadwal</a></li>
+            <li class="navbar-item"><a href="#gallery-section" class="scroll-link">Galeri</a></li>
+            <li class="navbar-item"><a href="#" id="navSocial">Sosial Media</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2 class="section-title" id="welcomeSection" style="border-bottom: none; margin-bottom: 20px;">Akses Cepat</h2>
+        
+        <div class="access-buttons">
+            <button class="button scroll-button" data-target="#about-section">About Us 📖</button>
+            <button class="button scroll-button" data-target="#structure-section">Struktur Kelas 👥</button>
+            <button class="button scroll-button" data-target="#members-section">Anggota Kelas 🧑‍🎓</button>
+            <button class="button scroll-button" data-target="#schedule-section">Jadwal Pelajaran 📅</button>
+            <button class="button scroll-button" data-target="#gallery-section">Galeri Foto 📸</button>
+            <button class="button" id="openSocialBtn">Sosial Media 📲</button>
+        </div>
+    </div>
+    
+    <section id="about-section" class="section">
+        <h3 class="section-title">XII MP 2: The Management Masters</h3>
+        <p>Kelas **XII MP 2** bukan sekadar ruang belajar, melainkan **rumah kedua** bagi kami, para calon profesional muda di bidang Manajemen Perkantoran. Tiga tahun perjalanan yang telah kita lalui bersama penuh dengan dinamika, tawa, dan tentu saja, tantangan.</p>
+        <p>Sejak awal, semangat sinergi dan kolaborasi telah menjadi ciri khas kami. Dari belajar menyusun arsip dengan rapi, mengelola surat menyurat, hingga menguasai teknologi perkantoran modern, setiap hari adalah investasi untuk masa depan. Kami dikenal sebagai kelas yang **serius dalam belajar**, namun selalu punya waktu untuk **tawa dan kekeluargaan**.</p>
+        <p>Di tahun terakhir ini, fokus kami semakin tajam. Kami tidak hanya berjuang untuk kelulusan, tetapi juga untuk membuktikan bahwa **Manajemen Perkantoran** adalah fondasi penting dalam dunia kerja. Kami adalah tim yang mampu **merencanakan (Plan), melaksanakan (Execute), dan mencapai (Succeed)** setiap target, baik di dalam kelas maupun di luar kegiatan sekolah.</p>
+    </section>
+
+    <section id="structure-section" class="section">
+        <h3 class="section-title">Struktur Organisasi Kelas XII MP 2</h3>
+        
+        <div class="wali-kelas-card">
+            <img src="Screenshot_20251006_093145~2.jpg" alt="Foto Wali Kelas">
+            <h4>Wali Kelas</h4>
+            <p style="margin: 5px 0 0 0;">Bu Muiyah, S.Pd</p>
+        </div>
+
+        <div class="structure-grid">
+            <div class="structure-card">
+                <img src="Screenshot_20251006_090642~2.jpg" alt="Foto Ketua Kelas">
+                <h4>Ketua Kelas</h4>
+                <p>Muhammad Nur Jamil</p>
+            </div>
+            
+            <div class="structure-card">
+                <img src="Screenshot_20251006_094929~2.jpg" alt="Foto Wakil Ketua Kelas">
+                <h4>Wakil Ketua Kelas</h4>
+                <p>Araya Hestyanjani</p>
+            </div>
+            
+            <div class="structure-card">
+                <img src="Screenshot_20251007_141557~2.jpg" alt="Foto Sekretaris 1">
+                <h4>Sekretaris 1</h4>
+                <p>Sekar Fatmalatifah</p>
+            </div>
+            
+            <div class="structure-card">
+                <img src="Screenshot_20251007_141625~2.jpg" alt="Foto Sekretaris 2">
+                <h4>Sekretaris 2</h4>
+                <p>Purnaya Anggita Ajeng</p>
+            </div>
+
+            <div class="structure-card">
+                <img src="Screenshot_20251007_141909~2.jpg" alt="Foto Bendahara 1">
+                <h4>Bendahara 1</h4>
+                <p>Nazwa Safitri</p>
+            </div>
+            
+            <div class="structure-card">
+                <img src="Screenshot_20251007_142007~2.jpg" alt="Foto Bendahara 2">
+                <h4>Bendahara 2</h4>
+                <p>Maura Virginia Alwer</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="members-section" class="section">
+        <h3 class="section-title">Anggota Kelas dan Bakat Mereka</h3>
+        <p style="text-align: center; margin-bottom: 40px; color: #6c757d;">Temukan daftar lengkap anggota kelas kami. Dari siswa yang berprestasi hingga yang berbakat, kami memiliki ragam individu yang membuat kelas kami dinamis.</p>
+
+        <div id="memberGridContainer">
+            </div>
+
+        <ul class="pagination" id="memberPaginationControls">
+            </ul>
+    </section>
+
+    <section id="schedule-section" class="section">
+        <h3 class="section-title">Jadwal Pelajaran Kelas XII MP 2</h3>
+        <img src="Screenshot_20251005_203909~2.jpg" alt="Jadwal Pelajaran XII MP 2 Tahun 2025">
+    </section>
+
+    <section id="gallery-section" class="section">
+        <h3 class="section-title">Galeri Foto Kelas XII MP 2</h3>
+        
+        <div id="galleryGridContainer">
+            </div>
+
+        <ul class="pagination" id="galleryPaginationControls">
+            </ul>
+    </section>
+
+    <footer>
+        <p style="margin-top: 50px; color: #6c757d;">&copy; 2025 Kelas XII MP 2. Semua Hak Cipta Dilindungi. Made by : Jamilz</p>
+    </footer>
+
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeSocialBtn">&times;</span>
+            <h4>Temukan Kami di Instagram</h4>
+            <a href="https://www.instagram.com/mptwonest" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram instagram-icon"></i>
+                <span class="instagram-username">@mptwonest</span>
+            </a>
+            <p style="margin-top: 20px; font-size: 14px; color: #6c757d;">Klik di atas untuk mengunjungi profil kami!</p>
+        </div>
+    </div>
+
+
+    <script>
+        // --- PENGATURAN JAVASCRIPT ---
+
+        // Fungsi untuk Smooth Scroll
+        document.querySelectorAll('.scroll-link, .scroll-button').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Dapatkan target ID dari href (untuk navbar) atau data-target (untuk tombol)
+                const targetId = this.getAttribute('href') ? this.getAttribute('href') : this.getAttribute('data-target');
+                
+                // Khusus untuk tombol Sosial Media
+                if (targetId === null || targetId === '#') {
+                    showModal(socialModal);
+                    return;
+                }
+
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Offset 80px agar tidak tertutup navbar
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Ambil elemen Modal Sosial Media
+        const socialModal = document.getElementById('socialModal');
+        const openSocialBtn = document.getElementById('openSocialBtn');
+        const navSocial = document.getElementById('navSocial');
+        const closeSocialBtn = document.getElementById('closeSocialBtn');
+
+
+        // --- FUNGSI UNTUK MENAMPILKAN MODAL SOSIAL MEDIA ---
+        const showModal = (modalElement) => {
+            modalElement.style.display = "block";
+        };
+
+        // --- HUBUNGKAN TOMBOL KE MODAL SOSIAL MEDIA ---
+        navSocial.onclick = (e) => { e.preventDefault(); showModal(socialModal); };
+        openSocialBtn.onclick = () => { showModal(socialModal); };
+        closeSocialBtn.onclick = () => { socialModal.style.display = "none"; };
+        
+
+        // Tutup modal jika mengklik di luar area modal
+        window.onclick = function(event) {
+            if (event.target == socialModal) { socialModal.style.display = "none"; }
+        }
+
+
+        // --- ANGGOTA KELAS DATA DAN PAGINASI ---
+        // TOTAL SISWA SEHARUSNYA 36 (6 Halaman x 6 Siswa)
+        const memberData = [
+            // Page 1 (Anggota 1-6) - SILAHKAN GANTI placeholder-memberX.jpg DENGAN FOTO SISWA
+            { name: "Aisyah Putri Dewi", skill: "ILLUSTRATOR", desc: "Aisyah adalah .....", img: "placeholder-member1.jpg" },
+            { name: "Alfi Dafifah Ramadhani", skill: "GAMER PROFESSIONAL", desc: "Alfi adalah...", img: "placeholder-member2.jpg" },
+            { name: "Amanda Agustia", skill: "RED CROSS VOLUNTEER", desc: "Amanda adalah .", img: "placeholder-member3.jpg" },
+            { name: "Amelia Putri Lestari", skill: "ILLUSTRATOR", desc: "Amel adalah .", img: "placeholder-member4.jpg" },
+            { name: "Apriell Fernanda Petra", skill: "DANCER", desc: "Apriell adalah .", img: "placeholder-member5.jpg" },
+            { name: "Araya Hestyanjani", skill: "CASUAL GAMER", desc: "Araya adalah .", img: "Screenshot_20251006_094929~2.jpg" },
+            
+            // Page 2 (Anggota 7-12) - SILAHKAN UBAH INI
+            { name: "Artita Meydina", skill: "BAKAT SISWA 7", desc: "Deskripsi Siswa 7...", img: "placeholder-member-7.jpg" },
+            { name: "Bilgis Satya Nugraha", skill: "Renang", desc: "Dia sering kali berenang untuk memasuki kepolisian", img: "Screenshot_20251007_101110~2.jpg" },
+            { name: "Cindi Riani Putri", skill: "BAKAT SISWA 9", desc: "Deskripsi Siswa 9...", img: "placeholder-member-9.jpg" },
+            { name: "Dinda Mutiara Aji", skill: "BAKAT SISWA 10", desc: "Deskripsi Siswa 10...", img: "placeholder-member-10.jpg" },
+            { name: "Dwi Dea Damayanti", skill: "BAKAT SISWA 11", desc: "Deskripsi Siswa 11...", img: "placeholder-member-11.jpg" },
+            { name: "Ekshal Luiza Asahi", skill: "Bermain Gitar", desc: "Dia terkadang bermain gitar atau alat musik lain dengan bagus", img: "Screenshot_20251007_140859~2.jpg" },
+            
+            // Page 3 (Anggota 13-18) - SILAHKAN UBAH INI
+            { name: "Fathiya Hasanah", skill: "BAKAT SISWA 13", desc: "Deskripsi Siswa 13...", img: "placeholder-member-13.jpg" },
+            { name: "Gladys Celia", skill: "BAKAT SISWA 14", desc: "Deskripsi Siswa 14...", img: "placeholder-member-14.jpg" },
+            { name: "Inaka Akhira Hidayat", skill: "BAKAT SISWA 15", desc: "Deskripsi Siswa 15...", img: "placeholder-member-15.jpg" },
+            { name: "Indri Lestari", skill: "BAKAT SISWA 16", desc: "Deskripsi Siswa 16...", img: "placeholder-member-16.jpg" },
+            { name: "Kayla Putri Maharani", skill: "BAKAT SISWA 17", desc: "Deskripsi Siswa 17...", img: "placeholder-member-17.jpg" },
+            { name: "Keyla Avriliani", skill: "BAKAT SISWA 18", desc: "Deskripsi Siswa 18...", img: "placeholder-member-18.jpg" },
+
+            // Page 4 (Anggota 19-24) - SILAHKAN UBAH INI
+            { name: "Lhutfiana Herawati", skill: "BAKAT SISWA 19", desc: "Deskripsi Siswa 19...", img: "placeholder-member-19.jpg" },
+            { name: "Lusiana Rahmawati", skill: "BAKAT SISWA 20", desc: "Deskripsi Siswa 20...", img: "placeholder-member-20.jpg" },
+            { name: "Maura Virginia Alwer", skill: "BAKAT SISWA 21", desc: "Deskripsi Siswa 21...", img: "Screenshot_20251007_142007~2.jpg" },
+            { name: "Moza Aulia Ramadahani", skill: "BAKAT SISWA 22", desc: "Deskripsi Siswa 22...", img: "placeholder-member-22.jpg" },
+            { name: "Muhammad Nur Jamil", skill: "BAKAT SISWA 23", desc: "Deskripsi Siswa 23...", img: "Screenshot_20251007_065542~2.jpg" },
+            { name: "Nabylla Ratu Aprilly", skill: "BAKAT SISWA 24", desc: "Deskripsi Siswa 24...", img: "placeholder-member-24.jpg" },
+
+            // Page 5 (Anggota 25-30) - SILAHKAN UBAH INI
+            { name: "Nazwa Safitri", skill: "BAKAT SISWA 25", desc: "Deskripsi Siswa 25...", img: "Screenshot_20251007_141909~2.jpg" },
+            { name: "Nur Anninda Rasya", skill: "BAKAT SISWA 26", desc: "Deskripsi Siswa 26...", img: "placeholder-member-26.jpg" },
+            { name: "Purnaya Anggita Ajeng", skill: "BAKAT SISWA 27", desc: "Deskripsi Siswa 27...", img: "Screenshot_20251007_141625~2.jpg" },
+            { name: "Raisha Malika Syahida", skill: "BAKAT SISWA 28", desc: "Deskripsi Siswa 28...", img: "placeholder-member-28.jpg" },
+            { name: "Rasti Maharani", skill: "BAKAT SISWA 29", desc: "Deskripsi Siswa 29...", img: "placeholder-member-29.jpg" },
+            { name: "Risky", skill: "RAJA JOKES", desc: "Dia sering kali membuat jokes bapak bapak, contoh nya buah apa yang sering naik angkot? kiwi bang ha~ha~ha", img: "Screenshot_20251007_065607~2.jpg" },
+
+            // Page 6 (Anggota 31-36) - SILAHKAN UBAH INI
+            { name: "Sekar Fatmalatifah", skill: "BAKAT SISWA 31", desc: "Deskripsi Siswa 31...", img: "Screenshot_20251007_141557~2.jpg" },
+            { name: "Sevina Adissa Ramadhani", skill: "BAKAT SISWA 32", desc: "Deskripsi Siswa 32...", img: "placeholder-member-32.jpg" },
+            { name: "Sheren Aurelia", skill: "BAKAT SISWA 33", desc: "Deskripsi Siswa 33...", img: "placeholder-member-33.jpg" },
+            { name: "Siti Muflihah", skill: "BAKAT SISWA 34", desc: "Deskripsi Siswa 34...", img: "placeholder-member-34.jpg" },
+            { name: "Vicky Ayu Aurora", skill: "BAKAT SISWA 35", desc: "Deskripsi Siswa 35...", img: "placeholder-member-35.jpg" },
+            { name: "Zamparing Hidayah", skill: "Menyanyi", desc: "Ia sangat sering menyanyi dan membuat temannya bahagia", img: "Screenshot_20251007_071438~2.jpg" }
+        ];
+
+        const memberGridContainer = document.getElementById('memberGridContainer');
+        const memberPaginationControls = document.getElementById('memberPaginationControls');
+        const membersPerPage = 6;
+        const totalMemberPages = Math.ceil(memberData.length / membersPerPage); 
+        let currentMemberPage = 1;
+
+        function createMemberCard(member) {
+            return `
+                <div class="member-card">
+                    <img src="${member.img}" alt="Foto ${member.name}">
+                    <h4>${member.name}</h4>
+                    <small>${member.skill}</small>
+                    <p>${member.desc}</p>
+                </div>
+            `;
+        }
+
+        function displayMembers(page) {
+            memberGridContainer.innerHTML = '';
+            const startIndex = (page - 1) * membersPerPage;
+            const endIndex = Math.min(startIndex + membersPerPage, memberData.length);
+            
+            const membersToShow = memberData.slice(startIndex, endIndex);
+
+            membersToShow.forEach(member => {
+                memberGridContainer.innerHTML += createMemberCard(member);
+            });
+
+            updateMemberPagination(page);
+        }
+
+        function updateMemberPagination(page) {
+            memberPaginationControls.innerHTML = '';
+            
+            // Tombol Previous
+            let prevLi = document.createElement('li');
+            prevLi.classList.add('pagination-item');
+            prevLi.innerHTML = `<a href="#" data-page="${page - 1}" class="member-page-link ${page === 1 ? 'disabled' : ''}">Previous</a>`;
+            memberPaginationControls.appendChild(prevLi);
+
+            // Tombol Angka (1, 2, 3, 4, 5, 6)
+            for (let i = 1; i <= totalMemberPages; i++) {
+                let li = document.createElement('li');
+                li.classList.add('pagination-item');
+                if (i === page) {
+                    li.classList.add('active');
+                    li.innerHTML = `<span>${i}</span>`;
+                } else {
+                    li.innerHTML = `<a href="#" data-page="${i}" class="member-page-link">${i}</a>`;
+                }
+                memberPaginationControls.appendChild(li);
+            }
+
+            // Tombol Next
+            let nextLi = document.createElement('li');
+            nextLi.classList.add('pagination-item');
+            nextLi.innerHTML = `<a href="#" data-page="${page + 1}" class="member-page-link ${page === totalMemberPages ? 'disabled' : ''}">Next</a>`;
+            memberPaginationControls.appendChild(nextLi);
+
+            // Tambahkan listener untuk klik tombol paginasi
+            memberPaginationControls.querySelectorAll('.member-page-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (link.classList.contains('disabled')) return;
+                    const newPage = parseInt(link.getAttribute('data-page'));
+                    if (newPage >= 1 && newPage <= totalMemberPages && newPage !== currentMemberPage) {
+                        currentMemberPage = newPage;
+                        displayMembers(currentMemberPage);
+                        // Gulir (scroll) kembali ke atas bagian anggota kelas
+                        document.getElementById('members-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        // --- END ANGGOTA KELAS DATA DAN PAGINASI ---
+
+        // --- GALERI FOTO DATA DAN PAGINASI BARU ---
+
+        const photoData = [
+            // 30 foto (6 pages * 6 photos = 36)
+            { src: "IMG-20251002-WA0096.jpg", alt: "Foto Kelas XII MP 2 - 1" },
+            { src: "IMG-20250915-WA0217.jpg", alt: "Foto Kelas XII MP 2 - 2" },
+            { src: "Screenshot_20251006_070427~2.jpg", alt: "Foto Kelas XII MP 2 - 3" },
+            { src: "Screenshot_20251006_070518~2.jpg", alt: "Foto Kelas XII MP 2 - 4" },
+            { src: "Screenshot_20251006_070544~2.jpg", alt: "Foto Kelas XII MP 2 - 5" },
+            { src: "Screenshot_20251007_102942~2.jpg", alt: "Foto Kelas XII MP 2 - 6" },
+            
+            // Page 2
+            { src: "Screenshot_20251006_100822~2.jpg", alt: "Foto Kelas XII MP 2 - 7" },
+            { src: "Screenshot_20251007_104331~2.jpg", alt: "Foto Kelas XII MP 2 - 8" },
+            { src: "Screenshot_20251007_123059~2 (1).jpg", alt: "Foto Kelas XII MP 2 - 9" },
+            { src: "Screenshot_20251007_103841~2.jpg", alt: "Foto Kelas XII MP 2 - 10" },
+            { src: "Screenshot_20251007_123418~2.jpg", alt: "Foto Kelas XII MP 2 - 11" },
+            { src: "Screenshot_20251007_123405~2.jpg", alt: "Foto Kelas XII MP 2 - 12" },
+
+            // Page 3
+            { src: "Screenshot_20251007_104205~2.jpg", alt: "Foto Kelas XII MP 2 - 13" },
+            { src: "Screenshot_20251007_104227~2.jpg", alt: "Foto Kelas XII MP 2 - 14" },
+            { src: "Screenshot_20251007_104032~2.jpg", alt: "Foto Kelas XII MP 2 - 15" },
+            { src: "Screenshot_20251007_104347~2.jpg", alt: "Foto Kelas XII MP 2 - 16" },
+            { src: "Screenshot_20251007_104406~2.jpg", alt: "Foto Kelas XII MP 2 - 17" },
+            { src: "Screenshot_20251007_104117~2.jpg", alt: "Foto Kelas XII MP 2 - 18" },
+
+            // Page 4
+            { src: "Screenshot_20251007_123119~2.jpg", alt: "Foto Kelas XII MP 2 - 19" },
+            { src: "Screenshot_20251007_123130~2.jpg", alt: "Foto Kelas XII MP 2 - 20" },
+            { src: "Screenshot_20251007_123150~2.jpg", alt: "Foto Kelas XII MP 2 - 21" },
+            { src: "Screenshot_20251007_123206~2.jpg", alt: "Foto Kelas XII MP 2 - 22" },
+            { src: "Screenshot_20251007_123222~2.jpg", alt: "Foto Kelas XII MP 2 - 23" },
+            { src: "Screenshot_20251007_123238~2.jpg", alt: "Foto Kelas XII MP 2 - 24" },
+
+            // Page 5
+            { src: "Screenshot_20251007_123253~2.jpg", alt: "Foto Kelas XII MP 2 - 25" },
+            { src: "Screenshot_20251007_123305~2.jpg", alt: "Foto Kelas XII MP 2 - 26" },
+            { src: "Screenshot_20251007_123317~2.jpg", alt: "Foto Kelas XII MP 2 - 27" },
+            { src: "Screenshot_20251007_123334~2.jpg", alt: "Foto Kelas XII MP 2 - 28" },
+            { src: "Screenshot_20251007_104142~2.jpg", alt: "Foto Kelas XII MP 2 - 29" },
+            { src: "Screenshot_20251007_104133~2.jpg", alt: "Foto Kelas XII MP 2 - 30" },
+
+            // Page 6
+            { src: "IMG-20251007-WA0054.jpg", alt: "Foto Kelas XII MP 2 - 31" },
+            { src: "IMG-20251006-WA0147.jpg", alt: "Foto Kelas XII MP 2 - 32" },
+            { src: "IMG-20251006-WA0127.jpg", alt: "Foto Kelas XII MP 2 - 33" },
+            { src: "IMG-20251006-WA0133.jpg", alt: "Foto Kelas XII MP 2 - 34" },
+            { src: "IMG-20251006-WA0059.jpg", alt: "Foto Kelas XII MP 2 - 35" },
+            { src: "IMG-20251006-WA0121.jpg", alt: "Foto Kelas XII MP 2 - 36" },
+        ];
+
+
+        const galleryGridContainer = document.getElementById('galleryGridContainer');
+        const galleryPaginationControls = document.getElementById('galleryPaginationControls');
+        const photosPerPage = 6;
+        const totalGalleryPages = Math.ceil(photoData.length / photosPerPage); 
+        let currentGalleryPage = 1;
+
+
+        function createPhotoElement(photo) {
+            return `<img src="${photo.src}" alt="${photo.alt}">`;
+        }
+
+        function displayPhotos(page) {
+            galleryGridContainer.innerHTML = '';
+            const startIndex = (page - 1) * photosPerPage;
+            const endIndex = Math.min(startIndex + photosPerPage, photoData.length);
+            
+            const photosToShow = photoData.slice(startIndex, endIndex);
+
+            photosToShow.forEach(photo => {
+                galleryGridContainer.innerHTML += createPhotoElement(photo);
+            });
+
+            updateGalleryPagination(page);
+        }
+
+        function updateGalleryPagination(page) {
+            galleryPaginationControls.innerHTML = '';
+            
+            // Tombol Previous
+            let prevLi = document.createElement('li');
+            prevLi.classList.add('pagination-item');
+            prevLi.innerHTML = `<a href="#" data-page="${page - 1}" class="gallery-page-link ${page === 1 ? 'disabled' : ''}">Previous</a>`;
+            galleryPaginationControls.appendChild(prevLi);
+
+            // Tombol Angka (1 sampai 6)
+            for (let i = 1; i <= totalGalleryPages; i++) {
+                let li = document.createElement('li');
+                li.classList.add('pagination-item');
+                if (i === page) {
+                    li.classList.add('active');
+                    li.innerHTML = `<span>${i}</span>`;
+                } else {
+                    li.innerHTML = `<a href="#" data-page="${i}" class="gallery-page-link">${i}</a>`;
+                }
+                galleryPaginationControls.appendChild(li);
+            }
+
+            // Tombol Next
+            let nextLi = document.createElement('li');
+            nextLi.classList.add('pagination-item');
+            nextLi.innerHTML = `<a href="#" data-page="${page + 1}" class="gallery-page-link ${page === totalGalleryPages ? 'disabled' : ''}">Next</a>`;
+            galleryPaginationControls.appendChild(nextLi);
+
+            // Tambahkan listener untuk klik tombol paginasi
+            galleryPaginationControls.querySelectorAll('.gallery-page-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (link.classList.contains('disabled')) return;
+                    const newPage = parseInt(link.getAttribute('data-page'));
+                    if (newPage >= 1 && newPage <= totalGalleryPages && newPage !== currentGalleryPage) {
+                        currentGalleryPage = newPage;
+                        displayPhotos(currentGalleryPage);
+                        // Gulir (scroll) kembali ke atas bagian galeri
+                        document.getElementById('gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        // Panggil fungsi untuk memuat halaman 1 saat dokumen dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            // Panggil untuk Anggota Kelas (sudah ada)
+            displayMembers(currentMemberPage); 
+            
+            // Panggil untuk Galeri Foto (baru)
+            displayPhotos(currentGalleryPage); 
+        });
+
+        // --- END GALERI FOTO DATA DAN PAGINASI BARU ---
+    </script>
+
+</body>
+</html>
